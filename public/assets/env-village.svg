@@ -1,0 +1,45 @@
+<svg width="405" height="180" viewBox="0 0 405 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Game / Scene / LakesideVillage / Gameplay">
+<rect width="1920" height="1080" transform="translate(-1291.31 -592.15)" fill="#82D4FF" style="fill:#82D4FF;fill:color(display-p3 0.5114 0.8330 1.0000);fill-opacity:1;"/>
+<g id="Environment / Village">
+<path id="Vector 78" d="M328.224 11.9569L304.283 3.00549L304.187 19.4164L328.224 11.9569Z" fill="#E9805A" style="fill:#E9805A;fill:color(display-p3 0.9137 0.5020 0.3529);fill-opacity:1;"/>
+<rect id="Rectangle 61" x="279.075" y="28.8794" width="51.4806" height="28.6797" rx="14.3398" fill="#F0CFA2" style="fill:#F0CFA2;fill:color(display-p3 0.9412 0.8118 0.6353);fill-opacity:1;"/>
+<rect id="Rectangle 62" x="353.142" y="83.5437" width="51.4806" height="28.6797" rx="14.3398" fill="#F1B37D" style="fill:#F1B37D;fill:color(display-p3 0.9451 0.7020 0.4902);fill-opacity:1;"/>
+<rect id="Rectangle 60" x="275.667" y="28.8794" width="28.6797" height="28.6797" rx="14.3398" fill="#F2D9B4" style="fill:#F2D9B4;fill:color(display-p3 0.9490 0.8510 0.7059);fill-opacity:1;"/>
+<path id="Vector 70" d="M222.414 155.139V105.094L305.737 105.094V155.139H222.414Z" fill="#F2E9D7" style="fill:#F2E9D7;fill:color(display-p3 0.9490 0.9137 0.8431);fill-opacity:1;"/>
+<rect id="Rectangle 58" x="275.667" y="41.4355" width="27.4443" height="74.4929" fill="#F8EDD6" style="fill:#F8EDD6;fill:color(display-p3 0.9725 0.9294 0.8392);fill-opacity:1;"/>
+<rect id="Rectangle 59" width="27.4443" height="74.4929" transform="matrix(-1 0 0 1 330.556 41.4355)" fill="#F1DCBB" style="fill:#F1DCBB;fill:color(display-p3 0.9451 0.8627 0.7333);fill-opacity:1;"/>
+<path id="Vector 73" d="M320.08 124.553L304.659 105.685L304.477 155.576H320.08V124.553Z" fill="#D7C9B1" style="fill:#D7C9B1;fill:color(display-p3 0.8431 0.7882 0.6941);fill-opacity:1;"/>
+<path id="Vector 65" d="M141.109 155.521V124.488L141.502 123.95H168.115L168.581 124.488V155.521H141.109Z" fill="#D6CBB4" style="fill:#D6CBB4;fill:color(display-p3 0.8392 0.7961 0.7059);fill-opacity:1;"/>
+<path id="Vector 66" d="M117.97 107.268H154.025L142.006 124.129L104.696 124.488L117.97 107.268Z" fill="#EEA873" style="fill:#EEA873;fill:color(display-p3 0.9333 0.6588 0.4510);fill-opacity:1;"/>
+<path id="Vector 67" d="M106.31 155.521V124.488L143.083 124.129V155.521H106.31Z" fill="#F5E6C9" style="fill:#F5E6C9;fill:color(display-p3 0.9608 0.9020 0.7882);fill-opacity:1;"/>
+<path id="Vector 68" d="M119.763 155.52V139.944C119.763 137.266 121.901 135.077 124.578 135.013C127.348 134.946 129.629 137.174 129.629 139.944V155.52H119.763Z" fill="#5B799A" style="fill:#5B799A;fill:color(display-p3 0.3569 0.4745 0.6039);fill-opacity:1;"/>
+<path id="Vector 65_2" fill-rule="evenodd" clip-rule="evenodd" d="M141.502 123.95L153.666 107.268L168.115 123.95H141.502Z" fill="#CEAE8E" style="fill:#CEAE8E;fill:color(display-p3 0.8078 0.6824 0.5569);fill-opacity:1;"/>
+<g id="Tree">
+<rect id="Rectangle 29" x="38.004" y="96.8633" width="26.524" height="39.8121" rx="13.262" fill="#407B72" style="fill:#407B72;fill:color(display-p3 0.2510 0.4824 0.4471);fill-opacity:1;"/>
+<rect id="Rectangle 30" x="48.7596" y="121.107" width="5.01285" height="39.8121" rx="2.50642" fill="#214B44" style="fill:#214B44;fill:color(display-p3 0.1284 0.2937 0.2685);fill-opacity:1;"/>
+</g>
+<g id="Tree_2">
+<rect id="Rectangle 29_2" y="115.878" width="26.524" height="39.8121" rx="13.262" fill="#407B72" style="fill:#407B72;fill:color(display-p3 0.2510 0.4824 0.4471);fill-opacity:1;"/>
+<rect id="Rectangle 30_2" x="10.7556" y="140.121" width="5.01285" height="39.8121" rx="2.50642" fill="#214B44" style="fill:#214B44;fill:color(display-p3 0.1284 0.2937 0.2685);fill-opacity:1;"/>
+</g>
+<g id="Tree_3">
+<rect id="Rectangle 29_3" x="159.138" y="66.1129" width="39.2571" height="58.9242" rx="19.6286" fill="#407B72" style="fill:#407B72;fill:color(display-p3 0.2510 0.4824 0.4471);fill-opacity:1;"/>
+<rect id="Rectangle 30_3" x="175.057" y="101.994" width="7.4193" height="58.9242" rx="3.70965" fill="#214B44" style="fill:#214B44;fill:color(display-p3 0.1284 0.2937 0.2685);fill-opacity:1;"/>
+</g>
+<path id="Vector 71" d="M180.624 98.6446L201.777 75.4277L223.188 103.288L223.704 155.655L180.624 156.429V98.6446Z" fill="#DCD1BB" style="fill:#DCD1BB;fill:color(display-p3 0.8627 0.8196 0.7333);fill-opacity:1;"/>
+<g id="Tree_4">
+<rect id="Rectangle 29_4" x="81.2429" y="23.3187" width="56.9773" height="85.522" rx="28.4887" fill="#407B72" style="fill:#407B72;fill:color(display-p3 0.2510 0.4824 0.4471);fill-opacity:1;"/>
+<rect id="Rectangle 30_4" x="104.348" y="75.3966" width="10.7683" height="85.522" rx="5.38415" fill="#214B44" style="fill:#214B44;fill:color(display-p3 0.1284 0.2937 0.2685);fill-opacity:1;"/>
+</g>
+<path id="Vector 69" d="M200.745 75.4278L283.036 74.1379L304.705 105.352L222.93 105.868L200.745 75.4278Z" fill="#E97D55" style="fill:#E97D55;fill:color(display-p3 0.9137 0.4902 0.3333);fill-opacity:1;"/>
+<path id="Vector 75" d="M404.622 99.6977L404.441 155.939L364.528 155.939V99.6685L364.709 99.6977H404.622Z" fill="#F3D8B1" style="fill:#F3D8B1;fill:color(display-p3 0.9529 0.8471 0.6941);fill-opacity:1;"/>
+<path id="Vector 76" d="M377.228 156.483V136.102C377.228 132.429 380.205 129.451 383.878 129.451C387.529 129.451 390.497 132.394 390.529 136.044L390.704 156.205L377.228 156.483Z" fill="#5B799A" style="fill:#5B799A;fill:color(display-p3 0.3569 0.4745 0.6039);fill-opacity:1;"/>
+<path id="Vector 79" d="M251.631 156.483V141.779C251.631 134.97 257.151 129.451 263.959 129.451C270.69 129.451 276.177 134.851 276.285 141.581L276.52 156.205L251.631 156.483Z" fill="#5B799A" style="fill:#5B799A;fill:color(display-p3 0.3569 0.4745 0.6039);fill-opacity:1;"/>
+<path id="Vector 77" d="M304.367 0V35.3368" stroke="#748FA5" style="stroke:#748FA5;stroke:color(display-p3 0.4549 0.5608 0.6471);stroke-opacity:1;" stroke-width="4"/>
+<path id="Vector 74" d="M350.559 105.866L304.114 105.685L319.535 124.553L364.528 124.371L350.559 105.866Z" fill="#E97D52" style="fill:#E97D52;fill:color(display-p3 0.9137 0.4902 0.3216);fill-opacity:1;"/>
+<path id="Vector 75_2" fill-rule="evenodd" clip-rule="evenodd" d="M318.81 123.646L319.717 155.939H353.242V119.86L318.81 123.646Z" fill="#F3D8B1" style="fill:#F3D8B1;fill:color(display-p3 0.9529 0.8471 0.6941);fill-opacity:1;"/>
+<path id="Vector 75_3" fill-rule="evenodd" clip-rule="evenodd" d="M353.242 119.86L353.461 119.836V97.8835L364.528 99.6685V155.939H353.242V119.86Z" fill="#D8CAB2" style="fill:#D8CAB2;fill:color(display-p3 0.8471 0.7922 0.6980);fill-opacity:1;"/>
+</g>
+</g>
+</svg>

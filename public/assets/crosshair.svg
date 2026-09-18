@@ -1,0 +1,14 @@
+<svg width="111" height="111" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Game / Scene / LakesideVillage / Gameplay">
+<g id="HUD / Crosshair">
+<circle id="Ellipse 6" cx="55.1848" cy="55.1874" r="40.893" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round"/>
+<circle id="Ellipse 7" cx="55.1847" cy="55.1874" r="10.8134" fill="#E05848" stroke="white" style="fill:#E05848;fill:color(display-p3 0.8784 0.3451 0.2824);fill-opacity:1;stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round"/>
+<g id="Group 7">
+<path id="Vector 3" d="M55.1848 2L55.1848 26.5889" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round"/>
+<path id="Vector 4" d="M55.1848 83.786L55.1848 108.375" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round"/>
+<path id="Vector 5" d="M108.375 55.1848L83.7859 55.1848" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round"/>
+<path id="Vector 6" d="M26.5889 55.1848L2.00002 55.1848" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round"/>
+</g>
+</g>
+</g>
+</svg>

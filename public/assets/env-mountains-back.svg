@@ -1,0 +1,11 @@
+<svg width="1920" height="222" viewBox="0 0 1920 222" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Game / Scene / LakesideVillage / Gameplay" clip-path="url(#clip0_0_1)">
+<rect width="1920" height="1080" transform="translate(0 -552.609)" fill="#82D4FF" style="fill:#82D4FF;fill:color(display-p3 0.5114 0.8330 1.0000);fill-opacity:1;"/>
+<path id="Mountains / Back" d="M670.544 0.700043C598.615 -6.04445 499.714 38.9188 310.902 76.5756C164.092 105.855 39.3647 138.569 -8.79629 152.423V221.582H1986.61V159.758L1759.58 82.758C1693.27 56.5294 1548.74 3.28543 1501.09 0.137998C1441.53 -3.79629 1129.09 77.6997 1049.29 77.6997C969.496 77.6997 742.472 7.44453 670.544 0.700043Z" fill="#83B0DB" style="fill:#83B0DB;fill:color(display-p3 0.5137 0.6902 0.8588);fill-opacity:1;"/>
+</g>
+<defs>
+<clipPath id="clip0_0_1">
+<rect width="1920" height="1080" fill="white" style="fill:white;fill-opacity:1;" transform="translate(0 -552.609)"/>
+</clipPath>
+</defs>
+</svg>

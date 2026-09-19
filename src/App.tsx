@@ -16,10 +16,11 @@ const assets = {
 const rand = (a: number, b: number) => a + Math.random() * (b - a);
 
 function makeBird(id: number, now: number, perched = false): Bird {
-  const direction = Math.random() > .5 ? 1 : -1;
+  const mobilePerch = perched && window.matchMedia('(max-aspect-ratio: 10/13)').matches;
+  const direction = perched ? (mobilePerch ? -1 : 1) : Math.random() > .5 ? 1 : -1;
   return {
-    id, state: perched ? 'PERCHED' : 'FLYING', x: perched ? 160 : direction === 1 ? -190 : 1940,
-    y: perched ? 414 : rand(205, 575), vx: rand(GAME.birdSpeedMin, GAME.birdSpeedMax) * direction, vy: 0,
+    id, state: perched ? 'PERCHED' : 'FLYING', x: perched ? (mobilePerch ? 1209 : 160) : direction === 1 ? -190 : 1940,
+    y: perched ? (mobilePerch ? 458 : 343) : rand(205, 575), vx: rand(GAME.birdSpeedMin, GAME.birdSpeedMax) * direction, vy: 0,
     direction, phase: rand(0, Math.PI * 2), born: now, stateAt: now, blinkUntil: 0,
     nextBlink: now + rand(1800, 4500), rotation: 0,
   };
@@ -30,7 +31,7 @@ export function App() {
   const [gun, setGun] = useState<GunState>('IDLE');
   const [birds, setBirds] = useState<Bird[]>([]);
   const [bursts, setBursts] = useState<{id:number;x:number;y:number}[]>([]);
-  const aim = useRef({ x: 960, y: 430 });
+  const aim = useRef({ x: 960, y: 530 });
   const [ammo, setAmmo] = useState<number>(GAME.magazine);
   const [score, setScore] = useState(0);
   const [combo, setCombo] = useState(1);
@@ -69,17 +70,19 @@ export function App() {
 
   const toVirtual = useCallback((clientX: number, clientY: number) => {
     const r = stage.current!.getBoundingClientRect();
-    const horizontalInset = Math.min(48, r.width * .04);
-    const usableWidth = r.width - horizontalInset * 2;
     return {
-      x: Math.max(0, Math.min(GAME.width, (clientX - r.left - horizontalInset) / usableWidth * GAME.width)),
+      x: Math.max(0, Math.min(GAME.width, (clientX - r.left) / r.width * GAME.width)),
       y: Math.max(0, Math.min(GAME.height, (clientY - r.top) / r.height * GAME.height)),
     };
   }, []);
 
   const updateAim = useCallback((point: {x:number;y:number}) => {
     aim.current = point;
-    if (crosshair.current) crosshair.current.style.transform = `translate3d(${point.x-53}px,${point.y-53}px,0)`;
+    if (crosshair.current) {
+      crosshair.current.style.left = `${point.x / GAME.width * 100}%`;
+      crosshair.current.style.top = `${point.y / GAME.height * 100}%`;
+      crosshair.current.style.opacity = '1';
+    }
   }, []);
 
   const moveAim = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
@@ -99,10 +102,16 @@ export function App() {
     window.setTimeout(() => setGun('RECOIL'), 70); window.setTimeout(() => setGun('IDLE'), 180);
     const nextAmmo = state.ammo - 1; setAmmo(nextAmmo);
     const shot = point ?? aim.current;
+    const stageRect = stage.current?.getBoundingClientRect();
+    const shotX = stageRect ? stageRect.left + shot.x / GAME.width * stageRect.width : 0;
+    const shotY = stageRect ? stageRect.top + shot.y / GAME.height * stageRect.height : 0;
     const target = [...state.birds].reverse().find(b => {
       if (!['PERCHED','ALERT','FLYING'].includes(b.state)) return false;
-      const cx = b.x + 82, cy = b.y + 92;
-      return ((shot.x-cx)/(174*GAME.hitboxX))**2 + ((shot.y-cy)/(183*GAME.hitboxY))**2 <= 1;
+      const birdRect = stage.current?.querySelector<HTMLElement>(`[data-bird-id="${b.id}"]`)?.getBoundingClientRect();
+      if (!birdRect) return false;
+      const cx = birdRect.left + birdRect.width / 2;
+      const cy = birdRect.top + birdRect.height / 2;
+      return ((shotX-cx)/(birdRect.width*.42))**2 + ((shotY-cy)/(birdRect.height*.42))**2 <= 1;
     });
     if (target) {
       const now = performance.now(); audio.play('hit'); audio.play('featherBurst');
@@ -148,7 +157,7 @@ export function App() {
         }));
         if (now-lastSpawn.current>GAME.spawnEveryMs && live.current.birds.length<GAME.maxBirds) {
           lastSpawn.current=now;
-          const perched = Math.random()<.32;
+          const perched = Math.random()<.32 && !live.current.birds.some(b => b.state === 'PERCHED' || b.state === 'ALERT');
           if (!perched) audio.play('wingFlap');
           setBirds(bs=>[...bs,makeBird(birdId.current++,now,perched)]);
         }
@@ -188,10 +197,10 @@ export function App() {
       <div className="hud-patch hud-score" aria-live="polite"><span>SCORE<b>{score.toLocaleString()}</b></span><img className="hud-divider" src={`${A}hud-divider.svg`}/><span>COMBO<b>X{combo}</b></span><div className="hearts">{[0,1,2].map(i=><img src={i<health?assets.heartFull:assets.heartEmpty} key={i}/>)}</div></div>
       <button className="pause" onClick={togglePause} aria-label={gameState==='PAUSED'?'Resume game':'Pause game'}><img src={assets.pause}/></button>
       <div className="ammo"><div className="rounds">{bullets.map((_,i)=><img src={i<ammo?assets.ammoAvailable:assets.ammoUsed} key={i}/>)}</div><span>AMMO<b>{String(ammo).padStart(2,'0')}/10</b></span></div>
-      {birds.map(b=>{const flap=Math.floor(performance.now()/GAME.flapMs)%2; const src=b.state==='PERCHED'?(b.blinkUntil?assets.perchedClosed:assets.perchedOpen):b.state==='ALERT'?assets.alert:b.state==='HIT'?assets.impact:b.state==='FALLING'?assets.falling:flap?assets.wingDown:assets.wingUp;return <div className={`bird ${b.state.toLowerCase()}`} key={b.id} style={{transform:`translate3d(${b.x}px,${b.y}px,0) rotate(${b.rotation}deg) scaleX(${b.direction})`}}><img src={src} draggable={false}/>{DEBUG&&<span/>}</div>})}
-      {bursts.map(x=><img className="burst" key={x.id} src={assets.feathers} style={{left:x.x,top:x.y}} draggable={false}/>)}
+      {birds.map(b=>{const flap=Math.floor(performance.now()/GAME.flapMs)%2; const src=b.state==='PERCHED'?(b.blinkUntil?assets.perchedClosed:assets.perchedOpen):b.state==='ALERT'?assets.alert:b.state==='HIT'?assets.impact:b.state==='FALLING'?assets.falling:flap?assets.wingDown:assets.wingUp;return <div className={`bird ${b.state.toLowerCase()}`} data-bird-id={b.id} key={b.id} style={{left:`${b.x / GAME.width * 100}%`,top:`${b.y / GAME.height * 100}%`,transform:`rotate(${b.rotation}deg) scaleX(${b.direction})`}}><img src={src} draggable={false}/>{DEBUG&&<span/>}</div>})}
+      {bursts.map(x=><img className="burst" key={x.id} src={assets.feathers} style={{left:`${x.x / GAME.width * 100}%`,top:`${x.y / GAME.height * 100}%`}} draggable={false}/>)}
       <div className={`gun gun-${gun.toLowerCase()}`}><img src={gunAsset} draggable={false}/></div>
-      <img ref={crosshair} className="crosshair" src={assets.crosshair} draggable={false} style={{transform:'translate3d(907px,377px,0)'}}/>
+      <img ref={crosshair} className="crosshair" src={assets.crosshair} draggable={false} style={{left:'50%',top:`${530 / GAME.height * 100}%`}}/>
       {DEBUG&&<output className="debug">{Math.round(aim.current.x)}, {Math.round(aim.current.y)} · {gameState} · {birds.length} birds</output>}
       {showOverlay&&<section className="overlay" aria-modal="true" role="dialog"><h1>{statusTitle}</h1><p>{statusCopy}</p><button onClick={gameState==='PAUSED'?togglePause:startGame}>{gameState==='PAUSED'?'RESUME':gameState==='GAME_OVER'?'PLAY AGAIN':'START GAME'}</button></section>}
     </div>

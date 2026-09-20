@@ -4,6 +4,7 @@ import { DEBUG, GAME } from './config';
 import type { Bird, GameState, GunState } from './types';
 import { Environment } from './Environment';
 import { GaneshaTempleScene } from './GaneshaTempleScene';
+import { BirdShooterGameOverModal } from './BirdShooterGameOverModal';
 
 const A = '/assets/';
 const assets = {
@@ -41,8 +42,8 @@ function BirdShooter() {
   const aim = useRef({ x: 960, y: 530 });
   const [ammo, setAmmo] = useState<number>(GAME.magazine);
   const [score, setScore] = useState(0);
-  const [combo, setCombo] = useState(1);
-  const [bestCombo, setBestCombo] = useState(1);
+  const [combo, setCombo] = useState(0);
+  const [bestCombo, setBestCombo] = useState(0);
   const [health, setHealth] = useState<number>(GAME.initialHealth);
   const [wave, setWave] = useState(1);
   const [waveHits, setWaveHits] = useState(0);
@@ -57,6 +58,8 @@ function BirdShooter() {
   const waveTimer = useRef<number | undefined>(undefined);
   const reloadDelayTimer = useRef<number | undefined>(undefined);
   const reloadTimer = useRef<number | undefined>(undefined);
+  const effectTimers = useRef<Set<number>>(new Set());
+  const [gameOverScale, setGameOverScale] = useState(1);
   const resumeState = useRef<GameState>('PLAYING');
   const last = useRef(performance.now());
   const lastSpawn = useRef(performance.now());
@@ -64,17 +67,42 @@ function BirdShooter() {
   const live = useRef({ gameState, birds, ammo, combo, health, wave, waveHits });
   live.current = { gameState, birds, ammo, combo, health, wave, waveHits };
 
-  const reset = useCallback(() => {
-    const now = performance.now();
+  const clearSessionTimers = useCallback(() => {
     window.clearTimeout(waveTimer.current);
     window.clearTimeout(reloadDelayTimer.current);
     window.clearTimeout(reloadTimer.current);
+    effectTimers.current.forEach(window.clearTimeout);
+    effectTimers.current.clear();
+  }, []);
+  const scheduleEffect = useCallback((callback: () => void, delay: number) => {
+    const timer = window.setTimeout(() => { effectTimers.current.delete(timer); callback(); }, delay);
+    effectTimers.current.add(timer);
+  }, []);
+
+  const reset = useCallback(() => {
+    const now = performance.now();
+    clearSessionTimers();
     resumeState.current = 'PLAYING';
-    setScore(0); setCombo(1); setBestCombo(1); setHealth(3); setAmmo(10); setGun('IDLE'); setBursts([]);
+    birdId.current = 1; burstId.current = 1; popupId.current = 1; drag.current = false;
+    aim.current = {x:960,y:530};
+    crosshair.current?.getAnimations().forEach(animation => animation.cancel());
+    if(crosshair.current){crosshair.current.style.left='50%';crosshair.current.style.top=`${530/GAME.height*100}%`;}
+    setScore(0); setCombo(0); setBestCombo(0); setHealth(GAME.initialHealth); setAmmo(GAME.magazine); setGun('IDLE'); setBursts([]);
     setWave(1); setWaveHits(0); setHits(0); setShots(0); setPopups([]);
     setBirds([makeBird(birdId.current++, now, true), makeBird(birdId.current++, now)]);
     last.current = now; lastSpawn.current = now; setGameState('PLAYING');
-  }, []);
+  }, [clearSessionTimers]);
+
+  const goHome = useCallback(() => {
+    audio.play('uiClick');
+    clearSessionTimers();
+    drag.current = false;
+    crosshair.current?.getAnimations().forEach(animation => animation.cancel());
+    setBirds([]);setBursts([]);setPopups([]);setGun('IDLE');
+    setScore(0);setCombo(0);setBestCombo(0);setHits(0);setShots(0);
+    setWave(1);setWaveHits(0);setHealth(GAME.initialHealth);setAmmo(GAME.magazine);
+    setGameState('READY');
+  }, [clearSessionTimers]);
 
   const startGame = useCallback(() => {
     audio.play('uiClick');
@@ -131,7 +159,7 @@ function BirdShooter() {
     if (state.gameState !== 'PLAYING' || state.ammo <= 0) return;
     audio.play('gunshot'); setGun('FIRE');
     setShots(n => n + 1);
-    window.setTimeout(() => setGun('RECOIL'), 70); window.setTimeout(() => setGun('IDLE'), 180);
+    scheduleEffect(() => setGun('RECOIL'), 70); scheduleEffect(() => setGun('IDLE'), 180);
     const nextAmmo = state.ammo - 1; setAmmo(nextAmmo);
     const shot = point ?? aim.current;
     const stageRect = stage.current?.getBoundingClientRect();
@@ -148,15 +176,15 @@ function BirdShooter() {
     const waveCleared = Boolean(target && state.waveHits + 1 >= GAME.waveGoal + (state.wave - 1) * GAME.waveGoalStep);
     if (target) {
       const now = performance.now(); audio.play('hit'); audio.play('featherBurst');
-      const points = GAME.shotScore * (target.species === 'blue' ? 2 : 1) * state.combo;
+      const points = GAME.shotScore * (target.species === 'blue' ? 2 : 1) * Math.max(1, state.combo);
       const popup = {id:popupId.current++,x:shot.x,y:shot.y,points};
       setPopups(xs => [...xs,popup]);
-      window.setTimeout(() => setPopups(xs => xs.filter(x => x.id !== popup.id)), 800);
+      scheduleEffect(() => setPopups(xs => xs.filter(x => x.id !== popup.id)), 800);
       crosshair.current?.animate([{scale:'1'},{scale:'1.2'},{scale:'1'}],{duration:190});
       setBirds(bs => bs.map(b => b.id === target.id ? {...b,state:'HIT',stateAt:now,vx:b.vx*.28} : b));
       setBursts(xs => [...xs, { id: burstId.current++, x: target.x - 55, y: target.y + 15, species:target.species }]);
-      window.setTimeout(() => setBursts(xs => xs.slice(1)), 650);
-      setScore(s => s + points); setBestCombo(v => Math.max(v, state.combo)); setCombo(v => v + 1); setHits(n => n + 1);
+      scheduleEffect(() => setBursts(xs => xs.slice(1)), 650);
+      setScore(s => s + points); setBestCombo(v => Math.max(v, state.combo || 1)); setCombo(v => v === 0 ? 2 : v + 1); setHits(n => n + 1);
       if (waveCleared) {
         setGameState('WAVE_BREAK');
         waveTimer.current = window.setTimeout(() => {
@@ -166,9 +194,9 @@ function BirdShooter() {
           setGameState('PLAYING');
         }, GAME.waveBreakMs);
       } else setWaveHits(n => n + 1);
-    } else setCombo(1);
+    } else setCombo(0);
     if (nextAmmo === 0 && !waveCleared) reloadDelayTimer.current = window.setTimeout(reload, 200);
-  }, [reload]);
+  }, [reload, scheduleEffect]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') togglePause(); if (e.key === ' ' && gameState === 'READY') reset(); };
@@ -217,17 +245,29 @@ function BirdShooter() {
   }, []);
 
   useEffect(() => () => {
-    window.clearTimeout(waveTimer.current);
-    window.clearTimeout(reloadDelayTimer.current);
-    window.clearTimeout(reloadTimer.current);
+    clearSessionTimers();
+  }, [clearSessionTimers]);
+
+  useEffect(() => {
+    const update = () => {
+      const rect = stage.current?.getBoundingClientRect();
+      if(rect)setGameOverScale(Math.min(1,(rect.width-24)/904,(rect.height-24)/702));
+    };
+    const observer = new ResizeObserver(update);
+    if(stage.current)observer.observe(stage.current);
+    update();
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     if (health === 0 && gameState !== 'GAME_OVER') {
       if (document.pointerLockElement) document.exitPointerLock();
+      clearSessionTimers();
+      drag.current = false;
+      crosshair.current?.getAnimations().forEach(animation => animation.pause());
       setGameState('GAME_OVER');
     }
-  }, [health, gameState]);
+  }, [health, gameState, clearSessionTimers]);
 
   useEffect(() => {
     if (gameState !== 'PLAYING' && gameState !== 'RELOADING' && document.pointerLockElement) {
@@ -236,13 +276,13 @@ function BirdShooter() {
   }, [gameState]);
 
   const gunAsset = gun==='FIRE'?assets.fire:gun==='RECOIL'?assets.recoil:gun==='RELOAD'?assets.reload:assets.idle;
-  const statusTitle = gameState==='READY'?'BIRD BLAST':gameState==='PAUSED'?'PAUSED':'GAME OVER';
-  const statusCopy = gameState==='READY'?'Aim true. Make every shot count.':gameState==='PAUSED'?'The flock is holding still.':`Score ${score.toLocaleString()} · Wave ${wave} · ${hits} hits · ${shots ? Math.round(hits / shots * 100) : 0}% accuracy · Best combo x${bestCombo}`;
-  const showOverlay = ['READY','PAUSED','GAME_OVER'].includes(gameState);
+  const statusTitle = gameState==='READY'?'BIRD BLAST':'PAUSED';
+  const statusCopy = gameState==='READY'?'Aim true. Make every shot count.':'The flock is holding still.';
+  const showOverlay = gameState==='READY'||gameState==='PAUSED';
   const bullets = useMemo(()=>Array.from({length:GAME.magazine}),[]);
 
   return <main className="shell">
-    <div className="game-stage" ref={stage}
+    <div className={`game-stage ${gameState==='GAME_OVER'?'is-game-over':''}`} ref={stage}
       onMouseMove={moveAim}
       onMouseDown={e=>{if((e.target as HTMLElement).closest('button'))return;updateAim(toVirtual(e.clientX,e.clientY));fire(aim.current);}}
       onPointerDown={e=>{if(e.pointerType!=='mouse'){drag.current=true;updateAim(toVirtual(e.clientX,e.clientY));}}}
@@ -260,7 +300,8 @@ function BirdShooter() {
       <img ref={crosshair} className="crosshair" src={assets.crosshair} draggable={false} style={{left:'50%',top:`${530 / GAME.height * 100}%`}}/>
       {DEBUG&&<output className="debug">{Math.round(aim.current.x)}, {Math.round(aim.current.y)} · {gameState} · {birds.length} birds</output>}
       {gameState==='WAVE_BREAK'&&<div className="wave-banner" role="status">WAVE {wave} CLEAR<span>WAVE {wave + 1} INCOMING</span></div>}
-      {showOverlay&&<section className="overlay" aria-modal="true" role="dialog"><h1>{statusTitle}</h1><p>{statusCopy}</p><button onClick={gameState==='PAUSED'?togglePause:startGame}>{gameState==='PAUSED'?'RESUME':gameState==='GAME_OVER'?'PLAY AGAIN':'START GAME'}</button></section>}
+      {showOverlay&&<section className="overlay" aria-modal="true" role="dialog"><h1>{statusTitle}</h1><p>{statusCopy}</p><button onClick={gameState==='PAUSED'?togglePause:startGame}>{gameState==='PAUSED'?'RESUME':'START GAME'}</button></section>}
+      {gameState==='GAME_OVER'&&<BirdShooterGameOverModal score={score} wave={wave} hits={hits} accuracy={shots?Math.round(hits/shots*100):0} bestCombo={bestCombo} scale={gameOverScale} onHome={goHome} onPlayAgain={startGame}/>}
     </div>
   </main>;
 }

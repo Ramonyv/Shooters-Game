@@ -1,0 +1,22 @@
+.bird-game-over-overlay{position:absolute;inset:0;z-index:60;display:block;background:rgba(8,20,28,.66);cursor:default;touch-action:none}
+.bird-game-over-art{position:absolute;left:50%;top:50%;width:904px;height:702px;transform-origin:center;pointer-events:none}
+.bird-game-over-card{position:absolute;left:0;top:107px;width:885px;height:595px;border-radius:48px;background:#9adcf7;overflow:visible;pointer-events:auto}
+.bird-game-over-card-wave{position:absolute;left:0;top:88.66px;width:885px;height:506.341px}
+.bird-game-over-header{position:absolute;left:63.62px;top:-106.84px;width:749px;height:392px;pointer-events:none}
+.bird-game-over-stats{position:absolute;left:85px;top:267.27px;width:715.165px;height:169.453px;border-radius:29.153px;background:#f9f4e7;box-shadow:inset 0 3.644px 3.644px #ffffff40,inset 0 -2.733px 3.644px #00000040;overflow:hidden}
+.bird-game-over-stat{position:absolute;top:19px;width:115px;display:flex;flex-direction:column;align-items:center;transform:translateX(-50%);font-family:"Nunito",system-ui,sans-serif;white-space:nowrap}
+.bird-game-over-stat img{display:block;width:70.15px;height:70.15px;object-fit:contain}
+.bird-game-over-stat span{margin-top:1px;color:#896d5b;font-size:18.221px;font-weight:1000;line-height:25px}
+.bird-game-over-stat strong{margin-top:3px;color:#472a14;font-size:27.331px;font-weight:1000;line-height:35px}
+.bird-game-over-divider{position:absolute;top:39px;width:3.64px;height:91.384px}
+.bird-game-over-button{position:absolute;top:452px;border:0;padding:0;background:none;cursor:pointer;line-height:0;transition:transform .16s ease,filter .16s ease}
+.bird-game-over-button.home{left:122.86px;width:263.302px;height:88px}
+.bird-game-over-button.replay{left:413.86px;width:352px;height:88px}
+.bird-game-over-button img{display:block;width:100%;height:100%}
+.bird-game-over-button:hover,.bird-game-over-close:hover{transform:translateY(-3px);filter:brightness(1.06)}
+.bird-game-over-button:active,.bird-game-over-close:active{transform:translateY(1px)}
+.bird-game-over-button:focus-visible,.bird-game-over-close:focus-visible{outline:4px solid #0b6e62;outline-offset:4px;border-radius:44px}
+.bird-game-over-leaves{position:absolute;top:431.8px;width:167px;height:181px;pointer-events:none}
+.bird-game-over-leaves.left{left:-61.29px}.bird-game-over-leaves.right{left:718.69px}
+.bird-game-over-close{position:absolute;left:817px;top:-27px;width:87.119px;height:87.119px;padding:0;border:0;background:none;cursor:pointer;line-height:0;transition:transform .16s ease,filter .16s ease}
+.bird-game-over-close img{display:block;width:100%;height:100%}

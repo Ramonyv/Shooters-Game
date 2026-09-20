@@ -12,26 +12,25 @@ const root = '/assets/Audio/Bird%20Shoot/';
 const templeRoot = '/assets/Audio/Ganesha%20Music/';
 const templeGame = `${templeRoot}game/`;
 const numbered = (name: string, count = 4) =>
-  Array.from({ length: count }, (_, index) => `${root}${name}%20${index + 1}.wav`);
+  Array.from({ length: count }, (_, index) => `${root}${name}%20${index + 1}.mp3`);
 
 const library: Record<SoundName, SoundConfig> = {
   gunshot: { files: numbered('gunshot'), volume: .46 },
   reload: { files: numbered('reload'), volume: .34 },
   birdAlert: { files: numbered('Bird%20alert'), volume: .3 },
   wingFlap: {
-    // Variant 3 is currently an invalid 243-byte file, so it is intentionally excluded.
-    files: [`${root}Wing%20flap%201.wav`, `${root}Wing%20flap%202.wav`, `${root}Wing%20flap%204.wav`],
+    files: [`${root}Wing%20flap%201.mp3`, `${root}Wing%20flap%202.mp3`, `${root}Wing%20flap%204.mp3`],
     volume: .16,
   },
   hit: { files: numbered('Hit'), volume: .4 },
   featherBurst: { files: numbered('Feather%20burst'), volume: .28 },
   uiClick: { files: numbered('UI%20click'), volume: .22 },
-  flowerLaunch: { files: [1,2,3,4].map(i => `${templeGame}flower_launch_0${i}.wav`), volume: .36 },
-  flowerImpact: { files: [`${templeGame}flower_impact.wav`], volume: .3 },
-  templeBell: { files: [`${templeGame}temple_bell.wav`], volume: .42 },
-  mouseSurprised: { files: [`${templeGame}mouse_surprised.wav`], volume: .38 },
-  modakPickup: { files: [`${templeGame}modak_pickup.wav`], volume: .3 },
-  flowerReload: { files: [`${templeRoot}flower_reload.wav`], volume: .36 },
+  flowerLaunch: { files: [1,2,3,4].map(i => `${templeGame}flower_launch_0${i}.mp3`), volume: .36 },
+  flowerImpact: { files: [`${templeGame}flower_impact.mp3`], volume: .3 },
+  templeBell: { files: [`${templeGame}temple_bell.mp3`], volume: .42 },
+  mouseSurprised: { files: [`${templeGame}mouse_surprised.mp3`], volume: .38 },
+  modakPickup: { files: [`${templeGame}modak_pickup.mp3`], volume: .3 },
+  flowerReload: { files: [`${templeRoot}flower_reload.mp3`], volume: .36 },
 };
 
 const loopLibrary: Record<LoopName, SoundConfig> = {

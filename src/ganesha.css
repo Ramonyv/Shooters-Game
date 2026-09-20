@@ -28,6 +28,13 @@
 .temple-mouse.mouse-idle.from-right svg,.temple-mouse.mouse-idle.from-right img,
 .temple-mouse.mouse-hit.from-right svg,.temple-mouse.mouse-hit.from-right img{transform:scaleX(-1)}
 .temple-mouse.mouse-hit{width:226px;height:213px;animation:mouse-reaction .72s ease-out both}
+.mouse-hit .mouse-size{position:relative}
+.mouse-impact{position:absolute;inset:0;z-index:1;pointer-events:none}
+.mouse-impact-ring{position:absolute;left:61%;top:49%;width:44px;height:44px;border:5px solid #ffc453;border-radius:50%;transform:translate(-50%,-50%);animation:mouse-impact-ring .55s ease-out both;box-shadow:0 0 0 4px #fff0c980}
+.mouse-impact-petal{position:absolute;left:61%;top:49%;width:23px;height:23px;background:var(--petal-color);mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;-webkit-mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;animation:mouse-impact-petal .7s cubic-bezier(.16,.75,.25,1) both}
+.mouse-hit .mouse-art{position:relative;z-index:2}
+.mouse-hit .mouse-art [id="Group 157"]{transform-box:fill-box;transform-origin:50% 80%;animation:mouse-modak-drop .72s ease-out both}
+@media(prefers-reduced-motion:reduce){.mouse-impact{display:none}.mouse-hit .mouse-art [id="Group 157"]{animation:none}}
 .kind-sneak.mouse-enter .mouse-art [id="Leg"],.kind-sneak.mouse-enter .mouse-art [id="Leg_2"]{animation-duration:.5s}
 :is(.mouse-enter,.mouse-escape) .mouse-art [id="Leg"]{transform-box:fill-box;transform-origin:58% 16%;animation:mouse-front-step .32s ease-in-out infinite}
 :is(.mouse-enter,.mouse-escape) .mouse-art [id="Leg_2"]{transform-box:fill-box;transform-origin:45% 14%;animation:mouse-back-step .32s ease-in-out infinite}
@@ -87,6 +94,9 @@
 .pause-vibes{position:absolute;top:755px;left:180px;width:435px;color:#956b50;font-size:17px;font-weight:800;letter-spacing:7px}.pause-bottom-flower{position:absolute;left:355px;top:809px;width:72px;height:68px}.pause-flourish{position:absolute;top:820px;width:59px;height:50px}.pause-flourish-left{left:296px}.pause-flourish-right{left:440px}.pause-petals{position:absolute;top:820px;width:28px;height:53px}.pause-petals-left{left:242px}.pause-petals-right{left:525px}
 @keyframes temple-cloud{to{transform:translateX(24px)}}@keyframes temple-sway{to{transform:rotate(2deg)}}@keyframes temple-rays{to{transform:rotate(360deg)}}
 @keyframes mouse-reaction{0%{transform:translateY(4px) rotate(0)}28%{transform:translateY(-12px) rotate(-7deg)}65%{transform:translateY(1px) rotate(3deg)}100%{transform:none}}
+@keyframes mouse-impact-ring{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}15%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(3.5)}}
+@keyframes mouse-impact-petal{0%{opacity:0;transform:translate(-50%,-50%) scale(.35) rotate(0)}16%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.8) rotate(var(--turn))}}
+@keyframes mouse-modak-drop{0%{transform:translateY(-15px) rotate(-11deg)}38%{transform:translateY(5px) rotate(6deg)}62%{transform:translateY(-5px) rotate(-4deg)}100%{transform:none}}
 @keyframes mouse-running-bob{from{transform:translateY(1px) rotate(-1deg)}to{transform:translateY(-5px) rotate(1deg)}}
 @keyframes mouse-sneak-bob{from{transform:translateY(2px) rotate(-.5deg)}to{transform:translateY(-1px) rotate(.5deg)}}
 @keyframes mouse-carry-bob{from{transform:translateY(1px) rotate(-.5deg)}to{transform:translateY(-4px) rotate(.5deg)}}

@@ -396,6 +396,10 @@ export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
       <div className={`temple-environment ${ganeshaHappy?'ganesha-happy':''}`} dangerouslySetInnerHTML={{__html:environment}}/>
       {miceView.map(m=><div key={m.id} className={`temple-mouse mouse-${m.phase} kind-${m.kind} from-${m.side} ${m.hit?'was-hit':''}`} style={{left:m.x-(mouseSize[m.phase].width-212)/2,top:m.y-(mouseSize[m.phase].height-145)}}>
         <div className="mouse-size" style={{transform:`scale(${m.scale})`}}>
+          {m.phase==='hit'&&<div className="mouse-impact" aria-hidden="true">
+            <span className="mouse-impact-ring"/>
+            {Array.from({length:8},(_,i)=><span key={i} className="mouse-impact-petal" style={{'--dx':`${Math.cos(i*Math.PI/4)*96}px`,'--dy':`${Math.sin(i*Math.PI/4)*78}px`,'--turn':`${i*45+55}deg`,'--petal-color':['#ff4b78','#ffbb45','#60c4ea','#ff7c18'][i%4]} as CSSProperties}/>)}
+          </div>}
           {mouseSvgs[mouseArt[m.phase]]
             ? <div className="mouse-art" dangerouslySetInnerHTML={{__html:mouseSvgs[mouseArt[m.phase]]}}/>
             : <img src={`${A}${mouseArt[m.phase]}.svg`} draggable={false} alt=""/>}

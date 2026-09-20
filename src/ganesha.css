@@ -50,6 +50,9 @@
 .temple-bell-reward{position:absolute;z-index:27;pointer-events:none;transform:translateX(-50%);white-space:nowrap;font:900 28px "Nunito",system-ui,sans-serif;color:#fff6d4;text-shadow:0 3px 0 #aa561c,0 5px 10px #4a2416aa}
 .temple-bell-sparks{position:absolute;inset:0;z-index:26;pointer-events:none}.bell-spark{position:absolute;display:block;mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;-webkit-mask:url('/assets/ganesha/flower.svg') center/contain no-repeat}
 .temple-environment.ganesha-happy [id="Shrine / GaneshaIllustration"] [id="Left Hand"]{transform-box:fill-box;transform-origin:55% 90%;animation:ganesha-blessing 1.05s ease-in-out both}
+.temple-environment [id="Bell Blessing Eyes"]{visibility:hidden}
+.temple-environment.ganesha-happy [id="Bell Blessing Eyes"]{visibility:visible}
+.temple-environment.ganesha-happy [id="Face"] [id="Vector 227"],.temple-environment.ganesha-happy [id="Face"] [id="Vector 228"]{visibility:hidden}
 .temple-scene.is-paused .temple-bell,.temple-scene.is-paused .temple-environment.ganesha-happy [id="Left Hand"]{animation-play-state:paused!important}
 .temple-launcher{left:718px;bottom:var(--launcher-lift,0px);width:484px;height:401px;z-index:20;overflow:visible}
 .launcher-art{position:absolute;left:50%;bottom:0;display:block;max-width:none;object-fit:contain;object-position:center bottom;opacity:0;transform:translateX(-50%);transform-origin:50% 100%;transition:opacity .07s ease-out}

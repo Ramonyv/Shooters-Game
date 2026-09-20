@@ -1,4 +1,4 @@
-.bird-game-over-overlay{position:absolute;inset:0;z-index:60;display:block;background:rgba(8,20,28,.66);cursor:default;touch-action:none}
+.bird-game-over-overlay{position:absolute;inset:0;z-index:60;display:block;background:rgba(8,20,28,.66);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);cursor:default;touch-action:none}
 .bird-game-over-art{position:absolute;left:50%;top:50%;width:904px;height:702px;transform-origin:center;pointer-events:none}
 .bird-game-over-card{position:absolute;left:0;top:107px;width:885px;height:595px;border-radius:48px;background:#9adcf7;overflow:visible;pointer-events:auto}
 .bird-game-over-card-wave{position:absolute;left:0;top:88.66px;width:885px;height:506.341px}
@@ -17,6 +17,6 @@
 .bird-game-over-button:active,.bird-game-over-close:active{transform:translateY(1px)}
 .bird-game-over-button:focus-visible,.bird-game-over-close:focus-visible{outline:4px solid #0b6e62;outline-offset:4px;border-radius:44px}
 .bird-game-over-leaves{position:absolute;top:431.8px;width:167px;height:181px;pointer-events:none}
-.bird-game-over-leaves.left{left:-61.29px}.bird-game-over-leaves.right{left:718.69px}
+.bird-game-over-leaves.left{left:-61.29px;clip-path:inset(0 0 0 61.29px)}.bird-game-over-leaves.right{left:718.69px}
 .bird-game-over-close{position:absolute;left:817px;top:-27px;width:87.119px;height:87.119px;padding:0;border:0;background:none;cursor:pointer;line-height:0;transition:transform .16s ease,filter .16s ease}
 .bird-game-over-close img{display:block;width:100%;height:100%}

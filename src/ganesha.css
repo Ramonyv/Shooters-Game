@@ -30,10 +30,13 @@
 .temple-mouse.mouse-hit{width:226px;height:213px;animation:mouse-reaction .72s ease-out both}
 .mouse-hit .mouse-size{position:relative}
 .mouse-impact{position:absolute;inset:0;z-index:3;pointer-events:none}
+.mouse-hit.from-right .mouse-impact{transform:scaleX(-1)}
 .mouse-impact-fur{position:absolute;left:49%;top:45%;width:var(--fur-size);height:calc(var(--fur-size) * 1.8);background:var(--fur-color);border-radius:85% 8% 78% 15%;box-shadow:inset -4px -5px 0 #34364033;animation:mouse-impact-fur .72s cubic-bezier(.14,.75,.24,1) var(--delay) both}
+.mouse-impact-flower{position:absolute;left:72%;top:19%;width:var(--flower-size);height:var(--flower-size);background:var(--flower-color);mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;-webkit-mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;animation:mouse-impact-flower .72s cubic-bezier(.12,.7,.24,1) var(--delay) both}
 .mouse-hit .mouse-art{position:relative;z-index:2}
+.mouse-hit .mouse-art [id="Gun Flower"]{transform-box:fill-box;transform-origin:center;animation:mouse-flower-pop .72s ease-out both}
 .mouse-hit .mouse-art [id="Group 157"]{transform-box:fill-box;transform-origin:50% 80%;animation:mouse-modak-drop .72s ease-out both}
-@media(prefers-reduced-motion:reduce){.mouse-impact{display:none}.mouse-hit .mouse-art [id="Group 157"]{animation:none}}
+@media(prefers-reduced-motion:reduce){.mouse-impact{display:none}.mouse-hit .mouse-art [id="Group 157"],.mouse-hit .mouse-art [id="Gun Flower"]{animation:none}}
 .kind-sneak.mouse-enter .mouse-art [id="Leg"],.kind-sneak.mouse-enter .mouse-art [id="Leg_2"]{animation-duration:.5s}
 :is(.mouse-enter,.mouse-escape) .mouse-art [id="Leg"]{transform-box:fill-box;transform-origin:58% 16%;animation:mouse-front-step .32s ease-in-out infinite}
 :is(.mouse-enter,.mouse-escape) .mouse-art [id="Leg_2"]{transform-box:fill-box;transform-origin:45% 14%;animation:mouse-back-step .32s ease-in-out infinite}
@@ -94,6 +97,8 @@
 @keyframes temple-cloud{to{transform:translateX(24px)}}@keyframes temple-sway{to{transform:rotate(2deg)}}@keyframes temple-rays{to{transform:rotate(360deg)}}
 @keyframes mouse-reaction{0%{transform:translateY(4px) rotate(0)}28%{transform:translateY(-12px) rotate(-7deg)}65%{transform:translateY(1px) rotate(3deg)}100%{transform:none}}
 @keyframes mouse-impact-fur{0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(0)}12%{opacity:1;transform:translate(-50%,-50%) scale(1.2) rotate(calc(var(--turn) * .35))}68%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.72) rotate(var(--turn))}}
+@keyframes mouse-impact-flower{0%{opacity:0;transform:translate(-50%,-50%) scale(.25) rotate(0)}16%{opacity:1;transform:translate(-50%,-50%) scale(1.25) rotate(-12deg)}75%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.8) rotate(var(--turn))}}
+@keyframes mouse-flower-pop{0%{transform:scale(.55) rotate(-18deg)}25%{transform:scale(1.3) rotate(8deg)}55%{transform:scale(.94) rotate(-3deg)}100%{transform:none}}
 @keyframes mouse-modak-drop{0%{transform:translateY(-15px) rotate(-11deg)}38%{transform:translateY(5px) rotate(6deg)}62%{transform:translateY(-5px) rotate(-4deg)}100%{transform:none}}
 @keyframes mouse-running-bob{from{transform:translateY(1px) rotate(-1deg)}to{transform:translateY(-5px) rotate(1deg)}}
 @keyframes mouse-sneak-bob{from{transform:translateY(2px) rotate(-.5deg)}to{transform:translateY(-1px) rotate(.5deg)}}

@@ -39,6 +39,10 @@ const MOUSE_FUR = [
   [92,64,185,18,'#858792'],[39,99,215,23,'#5b5e69'],[-28,93,258,18,'#777984'],
   [-105,62,290,24,'#535660'],[-132,9,320,17,'#858792'],[65,-26,70,15,'#ffa094'],
 ] as const;
+const MOUSE_FLOWERS = [
+  [-73,-55,-55,27,'#ff4b78'],[-25,-88,-15,22,'#ffc247'],[51,-75,35,25,'#ff708b'],
+  [92,-23,85,20,'#ffbd45'],[75,43,125,27,'#ff4b78'],[-46,58,-80,21,'#ff9b4f'],
+] as const;
 const rand = (a:number,b:number) => a + Math.random() * (b-a);
 
 export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
@@ -407,6 +411,7 @@ export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
             : <img src={`${A}${mouseArt[m.phase]}.svg`} draggable={false} alt=""/>}
           {m.phase==='hit'&&<div className="mouse-impact" aria-hidden="true">
             {MOUSE_FUR.map(([dx,dy,turn,size,color],i)=><span key={i} className="mouse-impact-fur" style={{'--dx':`${dx}px`,'--dy':`${dy}px`,'--turn':`${turn}deg`,'--fur-size':`${size}px`,'--fur-color':color,'--delay':`${i%3*22}ms`} as CSSProperties}/>)}
+            {MOUSE_FLOWERS.map(([dx,dy,turn,size,color],i)=><span key={i} className="mouse-impact-flower" style={{'--dx':`${dx}px`,'--dy':`${dy}px`,'--turn':`${turn}deg`,'--flower-size':`${size}px`,'--flower-color':color,'--delay':`${i%2*35}ms`} as CSSProperties}/>)}
           </div>}
         </div>
       </div>)}

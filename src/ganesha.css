@@ -47,7 +47,7 @@
 .temple-bell{transform-origin:50% 0;animation:bell-gentle-swing 3.6s ease-in-out infinite alternate}.temple-bell.right{animation-delay:-1.8s}.temple-bell.ringing{animation:bell-strong-swing 1.35s ease-out both}
 .temple-bell img{position:absolute;top:0;left:50%;display:block;width:137.38px;height:293.03px;max-width:none;transform:translateX(-50%);object-fit:contain;object-position:center top}
 .temple-bell img.bell-left,.temple-bell img.bell-right{width:177.4px;height:308px}.temple-bell img.bell-hit{width:221.7px;height:293.03px}
-.temple-bell-reward{position:absolute;z-index:27;pointer-events:none;transform:translateX(-50%);white-space:nowrap;font:900 28px ui-rounded,"SF Pro Rounded",Arial,sans-serif;color:#fff6d4;text-shadow:0 3px 0 #aa561c,0 5px 10px #4a2416aa}
+.temple-bell-reward{position:absolute;z-index:27;pointer-events:none;transform:translateX(-50%);white-space:nowrap;font:900 28px "Nunito",system-ui,sans-serif;color:#fff6d4;text-shadow:0 3px 0 #aa561c,0 5px 10px #4a2416aa}
 .temple-bell-sparks{position:absolute;inset:0;z-index:26;pointer-events:none}.bell-spark{position:absolute;display:block;mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;-webkit-mask:url('/assets/ganesha/flower.svg') center/contain no-repeat}
 .temple-environment.ganesha-happy [id="Shrine / GaneshaIllustration"] [id="Left Hand"]{transform-box:fill-box;transform-origin:55% 90%;animation:ganesha-blessing 1.05s ease-in-out both}
 .temple-scene.is-paused .temple-bell,.temple-scene.is-paused .temple-environment.ganesha-happy [id="Left Hand"]{animation-play-state:paused!important}
@@ -64,10 +64,10 @@
 .temple-projectile{width:35px;height:35px;z-index:24;transform:translate(-50%,-50%)}
 .temple-burst{width:35px;height:35px;z-index:25}
 .temple-flower-shower{position:absolute;inset:0;z-index:14;pointer-events:none;overflow:hidden}.shower-flower{position:absolute;display:block;mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;-webkit-mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;will-change:transform,top,opacity}
-.temple-score{position:absolute;left:1275px;top:37px;width:466px;height:93px;background:#fff;border:5px solid #e8eff0;border-radius:21px;z-index:31;display:flex;align-items:center;gap:24px;padding:0 20px;color:#111;font-family:Arial,sans-serif}
+.temple-score{position:absolute;left:1275px;top:37px;width:466px;height:93px;background:#fff;border:5px solid #e8eff0;border-radius:21px;z-index:31;display:flex;align-items:center;gap:24px;padding:0 20px;color:#111;font-family:"Nunito",system-ui,sans-serif}
 .temple-score div:not(.temple-hearts){display:flex;flex-direction:column;gap:4px;min-width:66px}.temple-score small{font-size:13px;font-weight:900}.temple-score strong{font-size:28px;font-weight:900;line-height:1}.temple-score i{height:51px;border-left:1px solid #eee}.temple-score .temple-combo{color:#f75e43}.temple-hearts{display:flex;margin-left:auto}.temple-hearts img{width:60px;height:60px}
 .temple-pause{position:absolute;left:1767px;top:37px;width:94px;height:94px;border:0;background:transparent;padding:0;z-index:40;cursor:pointer}.temple-pause img{width:100%;height:100%}
-.temple-ammo{position:absolute;left:26px;bottom:22px;width:652px;height:130px;z-index:31;display:flex;align-items:center;gap:45px;background:#102e43;border-radius:20px;padding:22px 36px;color:#fff;font-family:Arial,sans-serif}.temple-flowers{display:flex;gap:4px;flex:none}.temple-flowers img{width:35px;height:35px}.temple-ammo>div:last-child{display:flex;flex-direction:column}.temple-ammo small{font-size:24px;font-weight:900}.temple-ammo strong{font-size:40px;line-height:1.1}
+.temple-ammo{position:absolute;left:26px;bottom:22px;width:652px;height:130px;z-index:31;display:flex;align-items:center;gap:45px;background:#102e43;border-radius:20px;padding:22px 36px;color:#fff;font-family:"Nunito",system-ui,sans-serif}.temple-flowers{display:flex;gap:4px;flex:none}.temple-flowers img{width:35px;height:35px}.temple-ammo>div:last-child{display:flex;flex-direction:column}.temple-ammo small{font-size:24px;font-weight:900}.temple-ammo strong{font-size:40px;line-height:1.1}
 .temple-overlay{position:absolute;z-index:70;background:#102c3aaa;backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;cursor:default;overflow:hidden}
 .temple-pause-art{position:relative;flex:none;width:795px;height:950px;transform-origin:center}
 .temple-pause-art>img{position:absolute;display:block;pointer-events:none}
@@ -78,7 +78,7 @@
 .pause-ganesha{left:261px;top:23px;width:257px;height:310px;z-index:1}
 .pause-card-layer{left:87px;top:274px;width:621px;height:630px;z-index:2}.pause-card-shadow{filter:drop-shadow(0 14px 22px #1f1b1b50)}.pause-card-border{left:97px;top:284px;width:601px;height:610px}.pause-card-fill{left:107px;top:294px;width:581px;height:590px}
 .pause-mouse{top:676px;width:205px;height:145px;z-index:5}.pause-mouse-left{left:8px}.pause-mouse-right{right:8px;transform:scaleX(-1)}
-.pause-content{position:absolute;inset:0;z-index:4;text-align:center;color:#55200d;font-family:ui-rounded,"SF Pro Rounded",Arial,sans-serif}
+.pause-content{position:absolute;inset:0;z-index:4;text-align:center;color:#55200d;font-family:"Nunito",system-ui,sans-serif}
 .pause-content h1{position:absolute;left:155px;top:376px;width:485px;margin:0;color:#55200d;font-size:92px;font-weight:1000;line-height:1;text-shadow:0 4px 0 #d87f3c;letter-spacing:-4px}
 .pause-content p{position:absolute;left:155px;top:475px;width:485px;margin:0;color:#8a6c56;font-size:20px;font-weight:700}.pause-content p span{color:#f34e64}
 .pause-content button{position:absolute;left:190px;width:415px;height:82px;border-radius:500px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:20px;font-family:inherit;font-weight:1000;transition:transform .16s ease,filter .16s ease}.pause-content button:hover{transform:translateY(-3px);filter:brightness(1.06)}.pause-content button:active{transform:translateY(2px)}.pause-content button:focus-visible{outline:5px solid #0d785a;outline-offset:3px}

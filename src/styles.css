@@ -1,4 +1,4 @@
-:root{font-family:"SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif;color:#0d1d2b;background:#0d1d2b;font-synthesis:none}
+:root{font-family:"Nunito",system-ui,sans-serif;color:#0d1d2b;background:#0d1d2b;font-synthesis:none}
 *{box-sizing:border-box}html,body,#root{margin:0;width:100%;height:100%;overflow:hidden}button{font:inherit}
 .shell{display:grid;place-items:center;width:100%;height:100%;background:#0d1d2b;overflow:hidden}.game-stage{position:relative;width:min(100vw,calc(100vh * 16 / 9));height:min(100vh,calc(100vw * 9 / 16));overflow:hidden;cursor:none;touch-action:none;user-select:none;container-type:size;background:#82d4ff}
 .environment,.lakeside-background,.scene-svg{position:absolute;inset:0;width:100%;height:100%}.environment{z-index:0;pointer-events:none}.lakeside-background{display:block;object-fit:fill}.scene-svg svg{display:block;width:100%;height:100%}

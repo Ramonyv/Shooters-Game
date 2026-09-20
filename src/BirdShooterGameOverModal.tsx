@@ -30,7 +30,7 @@ export function BirdShooterGameOverModal({ score, wave, hits, accuracy, bestComb
         <img className="bird-game-over-header" src={`${A}header.svg`} alt="" draggable={false}/>
         <div className="bird-game-over-stats">
           {stats.map((stat, i) => <div className="bird-game-over-stat" key={stat.label} style={{ left: stat.x - 85 }}>
-            <img src={`${A}${stat.icon}`} alt="" draggable={false}/>
+            <div className={`bird-game-over-icon ${stat.label.toLowerCase().replace(' ','-')}`}><img src={`${A}${stat.icon}`} alt="" draggable={false}/></div>
             <span>{stat.label}</span>
             <strong>{values[i]}</strong>
           </div>)}

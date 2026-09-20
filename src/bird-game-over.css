@@ -23,6 +23,6 @@
 .bird-game-over-button:active,.bird-game-over-close:active{transform:translateY(1px)}
 .bird-game-over-button:focus-visible,.bird-game-over-close:focus-visible{outline:4px solid #0b6e62;outline-offset:4px;border-radius:44px}
 .bird-game-over-leaves{position:absolute;top:431.8px;width:167px;height:181px;pointer-events:none}
-.bird-game-over-leaves.left{left:-61.29px;clip-path:inset(0 0 0 61.29px)}.bird-game-over-leaves.right{left:718.69px}
+.bird-game-over-leaves.left{left:-61.29px;clip-path:inset(0 0 17.8px 61.29px)}.bird-game-over-leaves.right{left:718.69px;clip-path:inset(0 0 17.8px 0)}
 .bird-game-over-close{position:absolute;left:817px;top:-27px;width:87.119px;height:87.119px;padding:0;border:0;background:none;cursor:pointer;line-height:0;transition:transform .16s ease,filter .16s ease}
 .bird-game-over-close img{display:block;width:100%;height:100%}

@@ -331,6 +331,10 @@ export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
               vx:rand(-85,85),vy:rand(-145,-70),size:rand(12,21),age:0,
               color:FLOWER_SHOWER_COLORS[Math.floor(rand(0,7))]});
             ganeshaHappyClock.current=1.05;
+            scene.current?.querySelector<SVGGElement>('[id="Left Hand"]')?.getAnimations().forEach(animation=>{
+              animation.currentTime=0;
+              animation.play();
+            });
             setGaneshaHappy(true);
           }
         }

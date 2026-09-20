@@ -49,8 +49,8 @@
 .temple-bell img.bell-left,.temple-bell img.bell-right{width:177.4px;height:308px}.temple-bell img.bell-hit{width:221.7px;height:293.03px}
 .temple-bell-reward{position:absolute;z-index:27;pointer-events:none;transform:translateX(-50%);white-space:nowrap;font:900 28px ui-rounded,"SF Pro Rounded",Arial,sans-serif;color:#fff6d4;text-shadow:0 3px 0 #aa561c,0 5px 10px #4a2416aa}
 .temple-bell-sparks{position:absolute;inset:0;z-index:26;pointer-events:none}.bell-spark{position:absolute;display:block;mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;-webkit-mask:url('/assets/ganesha/flower.svg') center/contain no-repeat}
-.temple-environment.ganesha-happy [id="Shrine / GaneshaIllustration"]{transform-box:fill-box;transform-origin:50% 85%;animation:ganesha-happy-bounce 1.05s ease-in-out both}
-.temple-scene.is-paused .temple-bell,.temple-scene.is-paused .temple-environment.ganesha-happy [id="Shrine / GaneshaIllustration"]{animation-play-state:paused!important}
+.temple-environment.ganesha-happy [id="Shrine / GaneshaIllustration"] [id="Left Hand"]{transform-box:fill-box;transform-origin:55% 90%;animation:ganesha-blessing 1.05s ease-in-out both}
+.temple-scene.is-paused .temple-bell,.temple-scene.is-paused .temple-environment.ganesha-happy [id="Left Hand"]{animation-play-state:paused!important}
 .temple-launcher{left:718px;bottom:var(--launcher-lift,0px);width:484px;height:401px;z-index:20;overflow:visible}
 .launcher-art{position:absolute;left:50%;bottom:0;display:block;max-width:none;object-fit:contain;object-position:center bottom;opacity:0;transform:translateX(-50%);transform-origin:50% 100%;transition:opacity .07s ease-out}
 .launcher-idle{width:270px;height:262px}.launcher-fire{width:287px;height:401px}.launcher-recoil{width:303px;height:286px}.launcher-reload{width:484px;height:277px}
@@ -101,7 +101,7 @@
 @keyframes mouse-tail-swish{from{transform:rotate(-5deg)}to{transform:rotate(7deg)}}
 @keyframes bell-gentle-swing{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
 @keyframes bell-strong-swing{0%{transform:rotate(0)}12%{transform:rotate(-17deg)}29%{transform:rotate(14deg)}47%{transform:rotate(-10deg)}65%{transform:rotate(7deg)}82%{transform:rotate(-3deg)}100%{transform:rotate(0)}}
-@keyframes ganesha-happy-bounce{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateY(-8px) scale(1.025)}50%{transform:translateY(1px) scale(.99)}75%{transform:translateY(-3px) scale(1.01)}}
+@keyframes ganesha-blessing{0%,100%{transform:rotate(0)}22%{transform:rotate(-9deg) translateY(-2px)}48%{transform:rotate(5deg)}72%{transform:rotate(-5deg) translateY(-1px)}}
 @keyframes launcher-bloom{0%{transform:translateX(-50%) translateY(10px) scale(.98)}45%{transform:translateX(-50%) translateY(-8px) scale(1.02)}100%{transform:translateX(-50%) translateY(0) scale(1)}}
 @keyframes launcher-kick{0%{transform:translateX(-50%) translateY(-11px) rotate(-2deg)}42%{transform:translateX(-50%) translateY(13px) rotate(2deg)}100%{transform:translateX(-50%) translateY(0) rotate(0)}}
 @keyframes launcher-load{0%{opacity:0;transform:translateX(-50%) translateY(16px) rotate(-4deg)}15%{opacity:1;transform:translateX(-50%) translateY(2px) rotate(1deg)}38%{transform:translateX(-50%) translateY(9px) rotate(-2deg)}68%{opacity:1;transform:translateX(-50%) translateY(4px) rotate(1deg)}86%{opacity:1;transform:translateX(-50%) translateY(0) rotate(0)}100%{opacity:0;transform:translateX(-50%) translateY(0) rotate(0)}}

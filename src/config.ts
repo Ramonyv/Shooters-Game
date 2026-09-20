@@ -7,6 +7,9 @@ export const GAME = {
   initialHealth: 3,
   spawnEveryMs: 3000,
   maxBirds: 3,
+  waveGoal: 5,
+  waveGoalStep: 2,
+  waveBreakMs: 1400,
   flapMs: 120,
   impactMs: 110,
   alertMs: 450,
@@ -17,4 +20,3 @@ export const GAME = {
 } as const;
 
 export const DEBUG = import.meta.env.DEV && new URLSearchParams(location.search).has('debug');
-

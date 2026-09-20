@@ -1,9 +1,10 @@
-export type GameState = 'READY' | 'PLAYING' | 'PAUSED' | 'RELOADING' | 'GAME_OVER';
+export type GameState = 'READY' | 'PLAYING' | 'WAVE_BREAK' | 'PAUSED' | 'RELOADING' | 'GAME_OVER';
 export type BirdState = 'PERCHED' | 'ALERT' | 'FLYING' | 'HIT' | 'FALLING' | 'REMOVED';
 export type GunState = 'IDLE' | 'FIRE' | 'RECOIL' | 'RELOAD';
 
 export interface Bird {
   id: number;
+  species: 'green' | 'blue';
   state: BirdState;
   x: number;
   y: number;
@@ -17,4 +18,3 @@ export interface Bird {
   nextBlink: number;
   rotation: number;
 }
-

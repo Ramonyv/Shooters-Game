@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="111" height="111" viewBox="0 0 111 111" fill="none">
+<g id="HUD / Crosshair">
+<g id="HUD / Crosshair_2">
+<circle id="Crosshair / Ring" cx="55.1848" cy="55.1874" r="40.893" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round" />
+<g id="Group 7">
+<path id="Crosshair / Lines" d="M55.1848 2L55.1848 26.5889" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round" />
+<path id="Crosshair / Lines_2" d="M55.1848 83.786L55.1848 108.375" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round" />
+<path id="Crosshair / Lines_3" d="M108.375 55.1848L83.786 55.1848" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round" />
+<path id="Crosshair / Lines_4" d="M26.5889 55.1848L2.00002 55.1848" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="4" stroke-linecap="round" />
+</g>
+</g>
+<g id="Crosshair / FlowerCenter">
+<path id="Ellipse 53" d="M44.459 46.6553C45.9697 46.6553 47.3678 47.138 48.5073 47.9577C48.1871 47.1594 48.0109 46.2878 48.0109 45.3751C48.0109 41.5421 51.1182 38.4348 54.9512 38.4348C58.7842 38.4348 61.8915 41.5421 61.8915 45.3751C61.8915 46.535 61.607 47.6285 61.1038 48.5895C62.3511 47.3916 64.0449 46.6553 65.9108 46.6553C69.7438 46.6553 72.8511 49.7626 72.8511 53.5956C72.8511 57.1454 70.1859 60.0728 66.7475 60.486C67.7847 61.6988 68.4111 63.2735 68.4111 64.9944C68.4111 68.8275 65.3039 71.9347 61.4709 71.9347C58.2251 71.9347 55.4999 69.7068 54.7409 66.6968C53.9819 69.7068 51.2566 71.9347 48.0109 71.9347C44.1779 71.9347 41.0706 68.8275 41.0706 64.9944C41.0706 63.2081 41.7454 61.5794 42.8541 60.3494C39.7948 59.6252 37.5187 56.8762 37.5187 53.5956C37.5187 49.7626 40.626 46.6553 44.459 46.6553Z" fill="#EC6F46" style="fill:#EC6F46;fill:color(display-p3 0.9255 0.4353 0.2745);fill-opacity:1;" />
+<circle id="Ellipse 54" cx="55.1845" cy="56.4051" r="6.07567" fill="white" style="fill:white;fill-opacity:1;" />
+</g>
+</g>
+</svg>

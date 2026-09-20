@@ -33,6 +33,12 @@ const mouseSize: Record<MousePhase,{width:number;height:number}> = {
 };
 const bellArt = { idle:'bell_idle', hit:'bell_hit', left:'bell_left', right:'bell_right' };
 const bellAnchors: Record<BellSide, number> = { left: 618.62, right: 1164 };
+const MOUSE_FUR = [
+  [-112,-58,-100,25,'#656772'],[-75,-100,-35,20,'#797b86'],[-24,-112,-10,17,'#535660'],
+  [42,-100,40,24,'#858792'],[105,-72,95,19,'#535660'],[130,-8,135,25,'#737580'],
+  [92,64,185,18,'#858792'],[39,99,215,23,'#5b5e69'],[-28,93,258,18,'#777984'],
+  [-105,62,290,24,'#535660'],[-132,9,320,17,'#858792'],[65,-26,70,15,'#ffa094'],
+] as const;
 const rand = (a:number,b:number) => a + Math.random() * (b-a);
 
 export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
@@ -305,7 +311,7 @@ export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
         const finished:Shot[]=[];
         shots.current=shots.current.filter(s=>{s.age+=dt;if(s.age>=s.duration){finished.push(s);return false;}return true;});
         for(const s of finished){
-          bursts.current.push({id:seq.current++,x:s.tx,y:s.ty,age:0});
+          if(s.target!=='mouse')bursts.current.push({id:seq.current++,x:s.tx,y:s.ty,age:0});
           audio.play('flowerImpact');
           const hitMouse=s.mouseId===undefined?undefined:mice.current.find(m=>m.id===s.mouseId);
           if(s.target==='mouse' && hitMouse && !hitMouse.hit){
@@ -396,13 +402,12 @@ export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
       <div className={`temple-environment ${ganeshaHappy?'ganesha-happy':''}`} dangerouslySetInnerHTML={{__html:environment}}/>
       {miceView.map(m=><div key={m.id} className={`temple-mouse mouse-${m.phase} kind-${m.kind} from-${m.side} ${m.hit?'was-hit':''}`} style={{left:m.x-(mouseSize[m.phase].width-212)/2,top:m.y-(mouseSize[m.phase].height-145)}}>
         <div className="mouse-size" style={{transform:`scale(${m.scale})`}}>
-          {m.phase==='hit'&&<div className="mouse-impact" aria-hidden="true">
-            <span className="mouse-impact-ring"/>
-            {Array.from({length:8},(_,i)=><span key={i} className="mouse-impact-petal" style={{'--dx':`${Math.cos(i*Math.PI/4)*96}px`,'--dy':`${Math.sin(i*Math.PI/4)*78}px`,'--turn':`${i*45+55}deg`,'--petal-color':['#ff4b78','#ffbb45','#60c4ea','#ff7c18'][i%4]} as CSSProperties}/>)}
-          </div>}
           {mouseSvgs[mouseArt[m.phase]]
             ? <div className="mouse-art" dangerouslySetInnerHTML={{__html:mouseSvgs[mouseArt[m.phase]]}}/>
             : <img src={`${A}${mouseArt[m.phase]}.svg`} draggable={false} alt=""/>}
+          {m.phase==='hit'&&<div className="mouse-impact" aria-hidden="true">
+            {MOUSE_FUR.map(([dx,dy,turn,size,color],i)=><span key={i} className="mouse-impact-fur" style={{'--dx':`${dx}px`,'--dy':`${dy}px`,'--turn':`${turn}deg`,'--fur-size':`${size}px`,'--fur-color':color,'--delay':`${i%3*22}ms`} as CSSProperties}/>)}
+          </div>}
         </div>
       </div>)}
       <div className="temple-foreground" dangerouslySetInnerHTML={{__html:foreground}}/>

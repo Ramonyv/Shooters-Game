@@ -207,7 +207,10 @@ function BirdShooter() {
     let raf = 0;
     const tick = (now: number) => {
       const elapsed = now-last.current;
-      if (elapsed < 32) { raf=requestAnimationFrame(tick); return; }
+      // RAF already follows the display refresh rate. The old 32ms gate forced
+      // motion down to ~30fps (and often lower on 60Hz panels), which made aim
+      // and birds feel sticky even when the browser had plenty of headroom.
+      if (elapsed < 8) { raf=requestAnimationFrame(tick); return; }
       const dt = Math.min(.05, elapsed/1000); last.current = now;
       if (live.current.gameState === 'PLAYING' || live.current.gameState === 'RELOADING' || live.current.gameState === 'WAVE_BREAK') {
         setBirds(prev => prev.map((b): Bird => {
@@ -242,6 +245,18 @@ function BirdShooter() {
       raf=requestAnimationFrame(tick);
     };
     raf=requestAnimationFrame(tick); return()=>cancelAnimationFrame(raf);
+  }, []);
+
+  useEffect(() => {
+    // Decode gameplay art before it is first swapped into the scene. Without
+    // this, the first alert, hit, reload, or blue bird can stall a frame.
+    const urls = new Set<string>();
+    const collect = (value: string | Record<string, string>) => {
+      if (typeof value === 'string') urls.add(value);
+      else Object.values(value).forEach(url => urls.add(url));
+    };
+    Object.values(assets).forEach(collect);
+    urls.forEach(src => { const image = new Image(); image.decoding = 'async'; image.src = src; });
   }, []);
 
   useEffect(() => () => {

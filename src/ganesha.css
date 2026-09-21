@@ -56,8 +56,8 @@
 .temple-bell{transform-origin:50% 0;animation:bell-gentle-swing 3.6s ease-in-out infinite alternate}.temple-bell.right{animation-delay:-1.8s}.temple-bell.ringing{animation:bell-strong-swing 1.35s ease-out both}
 .temple-bell img{position:absolute;top:0;left:50%;display:block;width:137.38px;height:293.03px;max-width:none;transform:translateX(-50%);object-fit:contain;object-position:center top}
 .temple-bell img.bell-left,.temple-bell img.bell-right{width:177.4px;height:308px}.temple-bell img.bell-hit{width:221.7px;height:293.03px}
-.temple-bell-reward{position:absolute;z-index:27;pointer-events:none;transform:translateX(-50%);white-space:nowrap;font:900 28px "Nunito",system-ui,sans-serif;color:#fff6d4;text-shadow:0 3px 0 #aa561c,0 5px 10px #4a2416aa}
-.temple-bell-sparks{position:absolute;inset:0;z-index:26;pointer-events:none}.bell-spark{position:absolute;display:block;mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;-webkit-mask:url('/assets/ganesha/flower.svg') center/contain no-repeat}
+.temple-bell-reward{position:absolute;left:0;top:0;z-index:27;pointer-events:none;white-space:nowrap;font:900 28px "Nunito",system-ui,sans-serif;color:#fff6d4;text-shadow:0 3px 0 #aa561c,0 5px 10px #4a2416aa}
+.temple-bell-sparks{position:absolute;inset:0;z-index:26;pointer-events:none}.bell-spark{position:absolute;left:0;top:0;display:block;mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;-webkit-mask:url('/assets/ganesha/flower.svg') center/contain no-repeat}
 .temple-environment.ganesha-happy [id="Shrine / GaneshaIllustration"] [id="Left Hand"]{transform-box:fill-box;transform-origin:55% 90%;animation:ganesha-blessing 1.05s ease-in-out both}
 .temple-scene.is-paused .temple-bell,.temple-scene.is-paused .temple-environment.ganesha-happy [id="Left Hand"]{animation-play-state:paused!important}
 .temple-launcher{left:718px;bottom:var(--launcher-lift,0px);width:484px;height:401px;z-index:20;overflow:visible}
@@ -70,9 +70,9 @@
 .temple-reload .launcher-idle{animation:launcher-return 1.25s linear both}
 .temple-scene.is-paused .launcher-art{animation-play-state:paused!important}
 .temple-crosshair{width:106px;height:106px;z-index:30;transform:translate(-50%,-50%)}
-.temple-projectile{width:35px;height:35px;z-index:24;transform:translate(-50%,-50%)}
-.temple-burst{width:35px;height:35px;z-index:25}
-.temple-flower-shower{position:absolute;inset:0;z-index:14;pointer-events:none;overflow:hidden}.shower-flower{position:absolute;display:block;mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;-webkit-mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;will-change:transform,top,opacity}
+.temple-projectile{left:0;top:0;width:35px;height:35px;z-index:24}
+.temple-burst{left:0;top:0;width:35px;height:35px;z-index:25}
+.temple-flower-shower{position:absolute;inset:0;z-index:14;pointer-events:none;overflow:hidden}.shower-flower{position:absolute;left:0;top:0;display:block;mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;-webkit-mask:url('/assets/ganesha/flower.svg') center/contain no-repeat;will-change:transform,opacity}
 .temple-score{position:absolute;left:1275px;top:37px;width:466px;height:93px;background:#fff;border:5px solid #e8eff0;border-radius:21px;z-index:31;display:flex;align-items:center;gap:24px;padding:0 20px;color:#111;font-family:"Nunito",system-ui,sans-serif}
 .temple-score div:not(.temple-hearts){display:flex;flex-direction:column;gap:4px;min-width:66px}.temple-score small{font-size:13px;font-weight:900}.temple-score strong{font-size:28px;font-weight:900;line-height:1}.temple-score i{height:51px;border-left:1px solid #eee}.temple-score .temple-combo{color:#f75e43}.temple-hearts{display:flex;margin-left:auto}.temple-hearts img{width:60px;height:60px}
 .temple-pause{position:absolute;left:1767px;top:37px;width:94px;height:94px;border:0;background:transparent;padding:0;z-index:40;cursor:pointer}.temple-pause img{width:100%;height:100%}
@@ -142,3 +142,16 @@
 .layout-short .temple-ammo small{font-size:27px}.layout-short .temple-ammo strong{font-size:42px}
 .layout-short .temple-flowers{gap:3px}.layout-short .temple-flowers img{width:30px;height:30px}
 @media(prefers-reduced-motion:reduce){.temple-environment *{animation:none!important}.temple-mouse,.mouse-art *,.launcher-art,.temple-bell{animation:none!important}}
+
+/* Safari/WebKit performance path. Animated SVG masks and a blurred full-screen
+   layer cause frequent repaints there, so use a cheap petal silhouette and
+   keep moving effects on compositor-backed transforms. */
+.is-safari .temple-environment [id="Group 155"],
+.is-safari .temple-environment [id^="Shrine / Plant"]{animation:none}
+.is-safari .shower-flower,.is-safari .bell-spark,.is-safari .mouse-impact-flower{
+  -webkit-mask:none;mask:none;
+  clip-path:polygon(50% 0,64% 34%,100% 50%,64% 66%,50% 100%,36% 66%,0 50%,36% 34%);
+}
+.is-safari .temple-overlay{-webkit-backdrop-filter:none;backdrop-filter:none;background:#102c3ae8}
+.is-safari .temple-environment,.is-safari .temple-foreground,.is-safari .temple-footer{contain:layout paint;transform:translateZ(0)}
+.is-safari .temple-projectile,.is-safari .temple-burst,.is-safari .shower-flower,.is-safari .bell-spark,.is-safari .temple-bell-reward{will-change:transform,opacity}

@@ -44,6 +44,13 @@ const MOUSE_FLOWERS = [
   [92,-23,85,20,'#ffbd45'],[75,43,125,27,'#ff4b78'],[-46,58,-80,21,'#ff9b4f'],
 ] as const;
 const rand = (a:number,b:number) => a + Math.random() * (b-a);
+const TEMPLE_ART = [
+  'launcher_idle','launcher_fire','launcher_recoil','launcher_reload','flower','flower_empty',
+  'mouse_idle','mouse_carry','mouse_hit','mouse_escape','bell_idle','bell_hit','bell_left','bell_right','crosshair',
+];
+// This module is evaluated before main.tsx adds the CSS class, so detect here
+// as well for the Safari-specific particle budget.
+const SAFARI = /^((?!chrome|android|crios|fxios|edgios).)*safari/i.test(navigator.userAgent);
 
 export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
   const viewport = useRef<HTMLDivElement>(null);
@@ -146,6 +153,11 @@ export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
   }, [environment]);
 
   useEffect(() => {
+    TEMPLE_ART.forEach(name => {
+      const image = new Image();
+      image.decoding = 'async';
+      image.src = `${A}${name}.svg`;
+    });
     Promise.all(['mouse_idle','mouse_carry','mouse_hit','mouse_escape'].map(async name =>
       [name, await fetch(`${A}${name}.svg`).then(r=>r.text())] as const
     )).then(entries => setMouseSvgs(Object.fromEntries(entries)));
@@ -321,13 +333,14 @@ export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
           if(s.target==='mouse' && hitMouse && !hitMouse.hit){
             hitMouse.phase='hit';hitMouse.phaseTime=0;hitMouse.hit=true;
             const chained=gameClock.current-lastHit.current<3;setCombo(chained?c=>c+1:1);setScore(v=>v+100*(chained?2:1));lastHit.current=gameClock.current;audio.play('mouseSurprised');
-            const flowers = Array.from({length:36},(_,i):ShowerFlower=>({
+            const flowers = Array.from({length:SAFARI?14:24},(_,i):ShowerFlower=>({
               id:seq.current++,x:rand(820,1100),y:rand(305,365),vx:rand(-42,42),vy:rand(65,115),
               size:rand(17,31),rotation:rand(-180,180),spin:rand(-190,190),sway:rand(0,Math.PI*2),
               color:FLOWER_SHOWER_COLORS[i%FLOWER_SHOWER_COLORS.length],delay:rand(0,.5),age:0,
             }));
             shower.current.push(...flowers);
-            if(shower.current.length>108) shower.current=shower.current.slice(-108);
+            const showerLimit=SAFARI?36:72;
+            if(shower.current.length>showerLimit) shower.current=shower.current.slice(-showerLimit);
           } else if(s.target?.startsWith('bell-')){
             const side = s.target.slice(5) as BellSide;
             bellClock.current[side]=1.35;
@@ -420,23 +433,20 @@ export function GaneshaTempleScene({ onExit }: { onExit: () => void }) {
       {(['left','right'] as BellSide[]).map(side=><div className={`temple-bell ${side} ${bellView[side]==='idle'?'':'ringing'}`} key={side}>
         <img className={`bell-${bellView[side]}`} src={`${A}${bellArt[bellView[side]]}.svg`} draggable={false} alt=""/>
       </div>)}
-      {bellRewardsView.map(reward=><div key={reward.id} className="temple-bell-reward" style={{left:reward.x,top:reward.y-48*reward.age,opacity:1-reward.age/1.15}}>DING! +50</div>)}
+      {bellRewardsView.map(reward=><div key={reward.id} className="temple-bell-reward" style={{opacity:1-reward.age/1.15,transform:`translate3d(${reward.x}px,${reward.y-48*reward.age}px,0) translateX(-50%)`}}>DING! +50</div>)}
       <div className="temple-bell-sparks" aria-hidden="true">{bellSparksView.map(spark=><span key={spark.id} className="bell-spark" style={{
-        left:spark.x+spark.vx*spark.age,top:spark.y+spark.vy*spark.age+110*spark.age*spark.age,
         width:spark.size,height:spark.size,backgroundColor:spark.color,opacity:1-spark.age/.9,
-        transform:`translate(-50%,-50%) rotate(${spark.age*240}deg)`,
+        transform:`translate3d(${spark.x+spark.vx*spark.age}px,${spark.y+spark.vy*spark.age+110*spark.age*spark.age}px,0) translate(-50%,-50%) rotate(${spark.age*240}deg)`,
       }}/>)}</div>
-      {shotsView.map(s=>{const t=Math.min(1,s.age/s.duration);return <img key={s.id} className="temple-projectile" src={`${A}flower.svg`} style={{left:s.x+(s.tx-s.x)*t,top:s.y+(s.ty-s.y)*t}} alt=""/>;})}
-      {burstsView.map(b=><img key={b.id} className="temple-burst" src={`${A}flower.svg`} style={{left:b.x,top:b.y,opacity:1-b.age/.45,transform:`translate(-50%,-50%) scale(${1+b.age*2})`}} alt=""/>)}
+      {shotsView.map(s=>{const t=Math.min(1,s.age/s.duration);return <img key={s.id} className="temple-projectile" src={`${A}flower.svg`} style={{transform:`translate3d(${s.x+(s.tx-s.x)*t}px,${s.y+(s.ty-s.y)*t}px,0) translate(-50%,-50%)`}} alt=""/>;})}
+      {burstsView.map(b=><img key={b.id} className="temple-burst" src={`${A}flower.svg`} style={{opacity:1-b.age/.45,transform:`translate3d(${b.x}px,${b.y}px,0) translate(-50%,-50%) scale(${1+b.age*2})`}} alt=""/>)}
       <div className="temple-flower-shower" aria-hidden="true">{showerView.map(f=>{
         const t=Math.max(0,f.age-f.delay);
         return <span key={f.id} className="shower-flower" style={{
-          left:f.x+f.vx*t+Math.sin(t*7+f.sway)*11,
-          top:f.y+f.vy*t+55*t*t,
           width:f.size,height:f.size,
           backgroundColor:f.color,
           opacity:f.age<f.delay?0:Math.min(1,t*6)*Math.min(1,(2-t)/.7),
-          transform:`translate(-50%,-50%) rotate(${f.rotation+f.spin*t}deg)`,
+          transform:`translate3d(${f.x+f.vx*t+Math.sin(t*7+f.sway)*11}px,${f.y+f.vy*t+55*t*t}px,0) translate(-50%,-50%) rotate(${f.rotation+f.spin*t}deg)`,
         }}/>;
       })}</div>
       <div className={`temple-launcher temple-${weapon}`}>
